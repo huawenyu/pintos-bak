@@ -1,0 +1,48 @@
+# Config stuff
+/.config
+/.config.cache
+/.cross_compile
+/image*.out
+
+# From development
+tags
+GPATH
+GRTAGS
+GTAGS
+tags.files
+cscope*
+*.swp
+
+# Build directories
+/.build/
+
+# C Object and libs
+*.o
+*.a
+*.so
+*.so.*
+
+# Flags, dependencies, etc.
+*.flags
+*.d
+.depend
+.hdepend
+*.h.old
+*.map
+*.diff
+*.IAB
+*.IAD
+*.IMB
+*.IMD
+*.PFI
+*.PO
+*.PR
+*.PRI
+*.PS
+
+#code coverage file
+*.gcno
+
+# Other generated files
+modules.builtin
+modules.order
