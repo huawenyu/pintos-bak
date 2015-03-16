@@ -161,4 +161,8 @@ PASS
 REF
 ---
 [code ref1](svn checkout http://jawpintos.googlecode.com/svn/trunk/ pintos-jaw)  
+[code ref project-1](https://github.com/ryantimwilson/Pintos-Project-1)  
+[code ref project-2](https://github.com/ryantimwilson/Pintos-Project-2)  
+[code ref project-3](https://github.com/ryantimwilson/Pintos-Project-3)  
+[code ref project-4](https://github.com/ryantimwilson/Pintos-Project-4)  
 
