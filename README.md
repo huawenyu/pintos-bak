@@ -149,7 +149,7 @@ $ make check SIMULATOR=--qemu
 $ make check SIMULATOR=--bochs
 
 ### run specific test
-$ touch tests/threads/alarm-multiple.result
+$ touch ../../lib/debug.c
 $ make tests/threads/alarm-multiple.result
 $ cat tests/threads/alarm-multiple.result
 PASS
