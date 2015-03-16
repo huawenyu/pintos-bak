@@ -18,7 +18,20 @@ void debug_panic (const char *file, int line, const char *function,
 void debug_backtrace (void);
 void debug_backtrace_all (void);
 
+
+#define NDEBUG
+#ifdef NDEBUG
+#include <stdio.h>
+
+#define TRACE(fmt, args...) do { printf("(tid=%d) %s %s:%d:%s(): " fmt, \
+              thread_tid(), thread_name(), \
+              __FILE__, __LINE__, __func__, ##args); } while (0)
+#else
+#define TRACE(fmt, ...)
 #endif
+
+
+#endif /* endof __LIB_DEBUG_H */
 
 
 

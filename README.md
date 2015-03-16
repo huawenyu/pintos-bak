@@ -29,12 +29,21 @@ So we can install it from source. If download the latest tar from bochs, even ha
 So we use svn checkout the developing code and import it here.  
 
 ```bash
+### get the source
 $ svn co http://svn.code.sf.net/p/bochs/code/trunk/bochs bochs
 $ cd bochs
+<or>
+$ cd /home/wilson/proj/pintos/tools
+$ tar xjf bochs.tar.bz2
+$ cd bochs
+
+### $ ./configure LDFLAGS='-pthread'  <<< fedora gui/libgui.a(x.o): undefined reference to symbol 'XSetForeground'
+$ ./configure LDFLAGS='-pthread' --enable-gdb-stub --with-x --with-x11 --with-term --with-nogui
+
+### install the devel lib for fedora
 $ sudo yum install libX11-devel   <<< Xlib.h
 $ sudo yum install libXrandr-devel
 $ sudo yum install xorg-x11-server-devel
-$ ./configure LDFLAGS='-pthread'  <<< fedora gui/libgui.a(x.o): undefined reference to symbol 'XSetForeground'
 $ make
 $ sudo make install
 ```
