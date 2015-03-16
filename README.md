@@ -8,7 +8,8 @@ install on fedora 21 with bochs|qemu
 ====================================
 
 [ref](https://pintosiiith.wordpress.com/2012/09/13/install-pintos-with-qemu/)  
-Please change the $HOME '/home/wilson' to your own home directory.
+Please change the $HOME '/home/wilson' to your own home directory.  
+Now the qemu hang on 'Powering Off ...', so use bochs as our default simulator.
 
 source
 ------
@@ -41,9 +42,7 @@ $ cd bochs
 $ ./configure LDFLAGS='-pthread' --enable-gdb-stub --with-x --with-x11 --with-term --with-nogui
 
 ### install the devel lib for fedora
-$ sudo yum install libX11-devel   <<< Xlib.h
-$ sudo yum install libXrandr-devel
-$ sudo yum install xorg-x11-server-devel
+$ sudo yum install libX11-devel libXrandr-devel xorg-x11-server-devel
 $ make
 $ sudo make install
 ```
@@ -130,9 +129,13 @@ Please sure the dir 'utils' have setted in $PATH
 $ pintos -h  
 pintos run alarm-multiple, which passes the arguments 'run alarm-multiple' to the Pintos kernel.  
 In these arguments, run instructs the kernel to run a test and alarm-multiple is the test to run.  
+
 $ pintos run alarm-multiple  
-you can use the -v option to disable X output:  
-$ pintos -v -- run alarm-multiple.
+
+you can use the -v option to disable X output, -q let simulator auto-quit:  
+$ pintos -v -- run alarm-multiple.  
+$ pintos -v -- -q run alarm-single   <<< -v no-gui, -q after run and quit  
+$ pintos -vk -T 60 --bochs -- -q run alarm-single    <<< -T 60 timeout 60s and kill simulator if it's not quit.  
 
 TESTS
 -----
