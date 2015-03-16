@@ -157,3 +157,8 @@ $ make tests/threads/alarm-multiple.result
 $ cat tests/threads/alarm-multiple.result
 PASS
 ```
+
+REF
+---
+[code ref1](svn checkout http://jawpintos.googlecode.com/svn/trunk/ pintos-jaw)  
+
