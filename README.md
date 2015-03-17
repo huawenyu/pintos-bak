@@ -67,12 +67,19 @@ struct symbol_entry_t
 {
 ```
 
+```sh
 $ cd proj/pintos/src/misc
 $ sudo yum install SDL-devel byacc dev86 docbook-utils gtk2-devel iasl libXpm-devel libXt-devel readline-devel svgalib-devel
 $ sudo yum groupinstall "Development Tools" "Development Libraries"
 $ ./boshs-2.2.6-build.sh
 env SRCDIR=<srcdir> PINTOSDIR=<srcdir> DSTDIR=<dstdir> sh ./bochs-2.2.6-build.sh
-$ env SRCDIR=/home/wilson/proj/pintos/tools PINTOSDIR=/home/wilson/proj/pintos DSTDIR=/home/wilson/bin sh ./bochs-2.2.6-build.sh
+$ env SRCDIR=/home/wilson/proj/pintos/tools PINTOSDIR=/home/wilson/proj/pintos DSTDIR=/home/wilson/local sh ./bochs-2.2.6-build.sh
+
+### using the current ver-2.2.6 to check our test
+$ PATH=/home/wilson/local/bin:$PATH
+$ cd /home/wilson/proj/pintos/src/threads/build
+$ make check
+```
 
 patch scripts
 -------------
