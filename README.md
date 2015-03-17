@@ -29,6 +29,8 @@ If install from fedora using 'sudo yum install bochs', there have serval error w
 So we can install it from source. If download the latest tar from bochs, even have compile error.  
 So we use svn checkout the developing code and import it here.  
 
+###build from newest version
+
 ```bash
 ### get the source
 $ svn co http://svn.code.sf.net/p/bochs/code/trunk/bochs bochs
@@ -46,6 +48,31 @@ $ sudo yum install libX11-devel libXrandr-devel xorg-x11-server-devel
 $ make
 $ sudo make install
 ```
+
+###build from version 2.2.6
+
+[Using Bochs as a simulator](http://courses.mpi-sws.org/os-ss13/assignments/pintos/pintos_13.html)  
+[Install Pintos](http://web.stanford.edu/class/cs140/projects/pintos/pintos_12.html#SEC167)  
+[Solve compile error](http://blog.csdn.net/geeker_12/article/details/11409009)
+
+```diff
+index- bochs-2.2.6/bx_debug/symbol.cc:97
+using namespace std;  
+  
++ #ifdef __GNUC__
++ using namespace __gnu_cxx;
++ #endif
+
+struct symbol_entry_t
+{
+```
+
+$ cd proj/pintos/src/misc
+$ sudo yum install SDL-devel byacc dev86 docbook-utils gtk2-devel iasl libXpm-devel libXt-devel readline-devel svgalib-devel
+$ sudo yum groupinstall "Development Tools" "Development Libraries"
+$ ./boshs-2.2.6-build.sh
+env SRCDIR=<srcdir> PINTOSDIR=<srcdir> DSTDIR=<dstdir> sh ./bochs-2.2.6-build.sh
+$ env SRCDIR=/home/wilson/proj/pintos/tools PINTOSDIR=/home/wilson/proj/pintos DSTDIR=/home/wilson/bin sh ./bochs-2.2.6-build.sh
 
 patch scripts
 -------------
