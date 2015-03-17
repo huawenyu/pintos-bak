@@ -171,6 +171,15 @@ $ pintos -v -- run alarm-multiple.
 $ pintos -v -- -q run alarm-single   <<< -v no-gui, -q after run and quit  
 $ pintos -vk -T 60 --bochs -- -q run alarm-single    <<< -T 60 timeout 60s and kill simulator if it's not quit.  
 
+Change pintos's default simulator
+---------------------------------
+Pintos uses the Bochs simulator by default. We can change qemu to be the default simulator. Do the following to change qemu to be the default simulator:  
+  - In "$HOME/pintos/src/utils/pintos" change line no. 103 to "$sim = "qemu" if !defined $sim;"
+  - Open the file "$HOME/pintos/src/threads/Make.vars" and change the last line to be "SIMULATOR = --qemu"
+
+Now you can run alarm-multiple like 'pintos -q run alarm-multiple'  
+Notice we still need the '-q' option. This is because qemu won't exit without the option. It will simply hang after completing alarm-multiple. This option simply says to shutdown qemu after running alarm-multiple.  
+
 TESTS
 -----
 Please sure the dir 'utils' have setted in $PATH  
@@ -190,6 +199,36 @@ $ touch ../../lib/debug.c
 $ make tests/threads/alarm-multiple.result
 $ cat tests/threads/alarm-multiple.result
 PASS
+```
+
+Debugging
+---------
+
+To debug pintos you need two terminals. One to run pintos and one to run the debugger.  
+Be sure to start all commands from your pintos build sub-folder.  
+
+```bash
+First, we should in the build sub-dir, and run pintos with --gdb option.  
+It will prepare pintos as usual, but stop and wait for the debugger to connect.  
+
+$ cd pintos/src/threads/build
+$ pintos --gdb -- run mytest
+
+Second, open a second terminal on the same machine and use pintos-gdb to invoke GDB on 'kernel.o':
+
+$ cd pintos/src/threads/build
+$ pintos-gdb kernel.o
+
+It starts gdb configured for pintos. In the debugger, enter the commands:
+
+(gdb) target remote localhost:1234
+(gdb) 
+(gdb) debugpintos
+(gdb) break main
+(gdb) continue
+(gdb) continue
+(gdb) quit
+
 ```
 
 REF

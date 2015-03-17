@@ -267,9 +267,10 @@ thread_sleep(int64_t end_ticks)
   enum intr_level old_level;
 
   ASSERT (!intr_context());
-
-  TRACE ("push to the sleep list at %" PRId64 "\n", end_ticks);
   old_level = intr_disable();
+
+  /* if log before intr, the output will be mess. */
+  TRACE ("push-back sleep wait %" PRId64 "\n", end_ticks);
 
   t = thread_current();
   t->sleep_end = end_ticks;
@@ -290,17 +291,22 @@ thread_wake (int64_t ticks)
   ASSERT (intr_get_level () == INTR_OFF);
 
   for (e = list_begin(&sleep_list); e != list_end(&sleep_list);
-       e = list_next(e))
+       /* careful: remove or next */)
     {
       struct thread *t = list_entry (e, struct thread, sleep_elem);
       ASSERT (is_thread(t));
       if (t->sleep_end <= ticks)
         {
-          TRACE ("wakeup from the sleep list when ticks=%" PRId64 "\n", ticks);
+          TRACE ("wakeup %d sleep-util %"PRId64" when %"PRId64"\n",
+                 t->tid, t->sleep_end, ticks);
           t->sleep_end = 0;
-          list_remove(&t->sleep_elem);
+          e = list_remove(&t->sleep_elem);
           thread_unblock(t);
         }
+      else
+       {
+         e = list_next(e);
+       }
     }
 }
 
